@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <unordered_map>
 #include <vector>
 
@@ -9,6 +10,7 @@
 #include "dxvk_memory.h"
 #include "dxvk_resource.h"
 #include "dxvk_sparse.h"
+#include "dxvk_used_resource_counter.h"
 
 namespace dxvk {
 
@@ -80,6 +82,7 @@ namespace dxvk {
   struct DxvkBufferHandle {
     VkBuffer      buffer = VK_NULL_HANDLE;
     DxvkMemory    memory;
+    uint64_t usedFrameId;
   };
   
 
@@ -121,6 +124,7 @@ namespace dxvk {
    */
   class DxvkBuffer : public DxvkPagedResource {
     friend class DxvkBufferView;
+    friend class UsedResourceWatcher;
   public:
     
     DxvkBuffer(

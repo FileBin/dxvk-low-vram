@@ -25,6 +25,7 @@
 #include "dxvk_stats.h"
 #include "dxvk_unbound.h"
 #include "dxvk_marker.h"
+#include "dxvk_used_resource_counter.h"
 
 namespace dxvk {
   
@@ -534,6 +535,10 @@ namespace dxvk {
      * used by the GPU can be safely destroyed.
      */
     void waitForIdle();
+
+    const Rc<UsedResourceWatcher>& getResourceCounter() const {
+      return m_resource_counter;
+    }
     
   private:
     
@@ -542,6 +547,8 @@ namespace dxvk {
     Rc<DxvkInstance>            m_instance;
     Rc<DxvkAdapter>             m_adapter;
     Rc<vk::DeviceFn>            m_vkd;
+
+    Rc<UsedResourceWatcher> m_resource_counter;
 
     DxvkDeviceFeatures          m_features;
     DxvkDeviceInfo              m_properties;

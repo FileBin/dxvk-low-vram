@@ -11,6 +11,8 @@
 #include "dxvk_util.h"
 #include "dxvk_marker.h"
 
+#include "dxvk_device.h"
+
 namespace dxvk {
   
   /**
@@ -222,6 +224,8 @@ namespace dxvk {
             uint32_t              slot,
             Rc<DxvkImageView>&&   view) {
       if (m_rc[slot].bufferView != nullptr) {
+        m_device->getResourceCounter()->markImageView(view);
+
         m_rc[slot].bufferSlice = DxvkBufferSlice();
         m_rc[slot].bufferView  = nullptr;
       }
@@ -247,6 +251,8 @@ namespace dxvk {
         m_rc[slot].imageView = nullptr;
 
       if (view != nullptr) {
+        m_device->getResourceCounter()->markBufferView(view);
+
         m_rc[slot].bufferSlice = view->slice();
         m_rc[slot].bufferView = std::move(view);
       } else {

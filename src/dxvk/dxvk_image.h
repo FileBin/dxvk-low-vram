@@ -6,6 +6,7 @@
 #include "dxvk_resource.h"
 #include "dxvk_sparse.h"
 #include "dxvk_util.h"
+#include <cstdint>
 
 namespace dxvk {
 
@@ -112,6 +113,7 @@ namespace dxvk {
   struct DxvkPhysicalImage {
     VkImage     image = VK_NULL_HANDLE;
     DxvkMemory  memory;
+    uint64_t usedFrameId;
   };
   
   
@@ -124,6 +126,7 @@ namespace dxvk {
    */
   class DxvkImage : public DxvkPagedResource {
     friend class DxvkContext;
+    friend class UsedResourceWatcher;
     friend class DxvkImageView;
   public:
     

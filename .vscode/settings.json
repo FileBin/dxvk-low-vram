@@ -1,3 +1,6 @@
 {
-    "sonarlint.pathToCompileCommands": "${workspaceFolder}/build.w64/debug/compile_commands.json"
+    "sonarlint.pathToCompileCommands": "${workspaceFolder}/build.w64/debug/compile_commands.json",
+    "cSpell.words": [
+        "Dxvk"
+    ]
 }
