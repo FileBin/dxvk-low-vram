@@ -1,0 +1,6 @@
+dist*
+build*
+.cache
+wineprefix
+d3d-extras
+*.dxvk-cache
